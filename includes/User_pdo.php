@@ -155,7 +155,7 @@ class User_pdo
 
         $this->PDO;
         // On va chercher les tâches de l'utilisateur connecté 
-        $check = $this->PDO->prepare("SELECT DATE_FORMAT(tasks.date, '%d/%m/%Y'), tasks.id, utilisateurs.login, tasks.task FROM tasks INNER JOIN utilisateurs ON tasks.id_utilisateur=utilisateurs.id WHERE tasks.id_utilisateur=:user_id ORDER BY date DESC ");
+        $check = $this->PDO->prepare("SELECT DATE_FORMAT(tasks.date, '%d/%m/%Y'), DATE_FORMAT(tasks.done_date, '%d/%m/%Y'), tasks.id, utilisateurs.login, tasks.task FROM tasks INNER JOIN utilisateurs ON tasks.id_utilisateur=utilisateurs.id WHERE tasks.id_utilisateur=:user_id ORDER BY date DESC ");
         $check->execute(['user_id' => $user_id]);
         $displayTask = $check->fetchAll();
         // echo json_encode($displayTask);
@@ -167,13 +167,12 @@ class User_pdo
             // boucle 2 qui parcourt les cases du tableau
             foreach ($ligne as $value) {
                 $i++;
-                $result = ucfirst($displayTask[$i][3]) . " " . '(ajout le ' . $displayTask[$i][0] . ')<br>';
-                // $result = ucfirst($displayTask[$i][3]);
-
+                // $result = ucfirst($displayTask[$i][4]) . " " . '(ajout le ' . $displayTask[$i][0] . ')<br>';
+                $result = ucfirst($displayTask[$i][4]) . '<br> (ajout le : ' . $displayTask[$i][0] . ' & fait le : ' . $displayTask[$i][1] . ')<br>';
                 $id = $displayTask[$i][1];
                 echo '<li id="' . $id . '" ><input type="checkbox" class="box" id="box" name="box" value="todo">' . $result . '</li>';
-                // echo '<span id="date" class="date"> (ajout le ' . $displayTask[$i][0] . ')<br> </span>';
                 // arrêter lorsqu'il n'y a plus de valeur à parcourir
+
                 break;
             }
         }

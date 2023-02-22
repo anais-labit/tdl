@@ -27,8 +27,6 @@ add.addEventListener("click", async (event) => {
 let boxes = document.querySelectorAll(".box");
 let doneTasks = document.querySelector("#doneList");
 let toDoTasks = document.querySelector("#toDolist");
-// let spanDate = document.querySelector("#date");
-// let spanDoneDate = document.querySelector("#doneDate");
 
 console.log(boxes);
 for (const box of boxes) {
@@ -36,11 +34,11 @@ for (const box of boxes) {
     if (box.checked === true) {
       box.checked = true;
       doneTasks.appendChild(box.parentNode);
-            doneTasks.appendChild(box.parentNode);
-
+      
       console.log(box.parentNode.id);
     } else if (box.checked === false) {
       toDoTasks.appendChild(box.parentNode);
+      spanDate.appendChild(spanDate)
 
       // pour supprimer la tâche
       // doneTasks.removeChild(box.parentNode);
