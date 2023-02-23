@@ -27,7 +27,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'deco') {
                 <ul>
                     <?php if (isset($_SESSION['login'])) {  ?>
                         <ul>
-                            <li><a id="toDoList" href="todolist.php">My ToDoList</a></li>
+                            <li><a id="toDo" href="todolist.php">My ToDoList</a></li>
                             <li><a id="deconnexion" href="index.php?action=deco">Déconnexion</a></li>
                         </ul>
                     <?php } else {  ?>

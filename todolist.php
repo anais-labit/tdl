@@ -10,10 +10,19 @@ if (isset($_POST['task'])) {
     die();
 }
 
+var_dump($_POST['box']);
 
 if (isset($_POST['box'])) {
+    echo 'condition ok';
     $getTask = new User_pdo();
     $getTask->updateTask($id);
+    die();
+}
+
+if (isset($_GET['delete'])) {
+    $deleteTask = new User_pdo();
+    $deleteTask->deleteTask((int) $_GET['delete']);
+    die();
 }
 
 

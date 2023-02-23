@@ -152,14 +152,11 @@ class User_pdo
 
     public function displayTask($user_id)
     {
-
         $this->PDO;
         // On va chercher les tâches de l'utilisateur connecté 
         $check = $this->PDO->prepare("SELECT DATE_FORMAT(tasks.date, '%d/%m/%Y'), DATE_FORMAT(tasks.done_date, '%d/%m/%Y'), tasks.id, utilisateurs.login, tasks.task FROM tasks INNER JOIN utilisateurs ON tasks.id_utilisateur=utilisateurs.id WHERE tasks.id_utilisateur=:user_id ORDER BY date DESC ");
         $check->execute(['user_id' => $user_id]);
         $displayTask = $check->fetchAll();
-        // echo json_encode($displayTask);
-        // var_dump($displayTask);
 
         $i = -1;
         // boucle 1 qui parcourt les différents tableaux de commentaire
@@ -169,10 +166,14 @@ class User_pdo
                 $i++;
                 // $result = ucfirst($displayTask[$i][4]) . " " . '(ajout le ' . $displayTask[$i][0] . ')<br>';
                 $result = ucfirst($displayTask[$i][4]) . '<br> (ajout le : ' . $displayTask[$i][0] . ' & fait le : ' . $displayTask[$i][1] . ')<br>';
-                $id = $displayTask[$i][1];
-                echo '<li id="' . $id . '" ><input type="checkbox" class="box" id="box" name="box" value="todo">' . $result . '</li>';
+                $id = $displayTask[$i][2];
+                echo '<li id="' . $id . '" >
+                        <input type="checkbox" class="box" id="box" name="box" value="todo">' . $result . ' 
+                        <button type="submit" class="del" id="' . $id . '">
+                            <a class="delete" href="todolist.php?delete=' . $id . '"><i class="fa-solid fa-trash"></i></a>
+                        </button>
+                    </li>';
                 // arrêter lorsqu'il n'y a plus de valeur à parcourir
-
                 break;
             }
         }
@@ -180,22 +181,30 @@ class User_pdo
 
     public function updateTask($user_id)
     {
-
         $this->PDO;
         $getTask = $this->PDO->prepare("SELECT * FROM tasks WHERE id_utilisateur=:user_id");
         $getTask->execute(['user_id' => $user_id]);
-        $getTaskInfos = $getTask->fetchAll(PDO::FETCH_ASSOC);
+        $getTaskInfos = $getTask->fetchAll();
 
         var_dump($getTaskInfos);
 
         $done_date = date('Y-m-d H:i:s');
-
 
         $upTask = $this->PDO->prepare("UPDATE tasks SET done_date =:done_date, status=1 WHERE id_utilisateur=:user_id");
         $upTask->execute([
             'user_id' => $user_id,
             'done_date' => $done_date,
         ]);
+    }
+
+    public function deleteTask(int $task_id)
+    {
+        $this->PDO;
+        $delTask = $this->PDO->prepare("DELETE FROM tasks WHERE tasks.id=:task_id");
+        $delTask->execute(['task_id' => $task_id]);
+
+        // $deleteTask = $this->PDO->prepare("DELETE FROM tasks WHERE ")
+
     }
 
 
