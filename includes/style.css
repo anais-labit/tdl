@@ -173,7 +173,7 @@ h1 {
 }
 .lists {
   display: flex;
-  justify-items: space-around;
+  justify-content: space-around;
   width: 100%;
 }
 

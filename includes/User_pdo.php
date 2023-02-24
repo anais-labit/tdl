@@ -179,20 +179,18 @@ class User_pdo
         }
     }
 
-    public function updateTask($user_id)
+    public function updateTask($task_id)
     {
         $this->PDO;
-        $getTask = $this->PDO->prepare("SELECT * FROM tasks WHERE id_utilisateur=:user_id");
-        $getTask->execute(['user_id' => $user_id]);
+        $getTask = $this->PDO->prepare("SELECT * FROM tasks WHERE id=:task_id");
+        $getTask->execute(['task_id' => $task_id]);
         $getTaskInfos = $getTask->fetchAll();
-
-        var_dump($getTaskInfos);
 
         $done_date = date('Y-m-d H:i:s');
 
-        $upTask = $this->PDO->prepare("UPDATE tasks SET done_date =:done_date, status=1 WHERE id_utilisateur=:user_id");
+        $upTask = $this->PDO->prepare("UPDATE tasks SET done_date =:done_date, status=1 WHERE id=:task_id");
         $upTask->execute([
-            'user_id' => $user_id,
+            'task_id' => $task_id,
             'done_date' => $done_date,
         ]);
     }

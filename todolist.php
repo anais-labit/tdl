@@ -4,18 +4,21 @@ require_once './includes/User_pdo.php';
 
 $id = $_SESSION['id'];
 
+// echo 'hello';
+
 if (isset($_POST['task'])) {
     $newTask = new User_pdo();
     $newTask->addTask($id);
     die();
 }
 
-var_dump($_POST['box']);
 
-if (isset($_POST['box'])) {
+if (isset($_GET['checked'])) {
+
     echo 'condition ok';
+    // var_dump($_GET['checked']);
     $getTask = new User_pdo();
-    $getTask->updateTask($id);
+    $getTask->updateTask((int) $_GET['checked']);
     die();
 }
 
@@ -35,14 +38,13 @@ if (isset($_GET['delete'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./includes/style.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,800">
+    <!-- <link rel="stylesheet" href="./includes/style.css" /> -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,800"> -->
     <title>My ToDoList</title>
 </head>
 
 <body>
-    <?php require_once './includes/header.php'
-    ?>
+
     <div class="taskContainer" id="taskContainer">
         <form action="" method="post" id="addForm">
             <h1>Créer une tâche</h1>

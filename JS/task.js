@@ -16,10 +16,9 @@ add.addEventListener("click", async (event) => {
     .then((content) => {
       let adding = document.getElementById("adding"); // élément HTML pour afficher un message de succès
       adding.innerHTML = content; // affiche le message de la réponse
-      adding.style.color = "#639fab"; // change la couleur du message
+      adding.style.color = "#639fab";
 
       if (content == "Votre tâche a bien été ajoutée !") {
-        // redirection après 1,5 seconde si la tâche a bien été ajoutée
         setTimeout(function () {
           window.location.href = "todolist.php";
         }, 1500);
@@ -33,7 +32,7 @@ let toDoTasks = document.querySelector("#toDolist"); // élément HTML pour les 
 
 // boucle à travers toutes les cases à cocher
 for (const box of boxes) {
-  console.log(box.parentNode.id);
+  let idTask = box.parentNode.id; // récupère l'identifiant de la tâche à supprimer
   box.addEventListener("click", () => {
     if (box.checked === true) {
       // si la case est cochée
@@ -43,11 +42,19 @@ for (const box of boxes) {
       // si la case n'est pas cochée
       toDoTasks.appendChild(box.parentNode); // déplace la tâche à faire vers l'élément HTML "toDoTasks"
     }
+    checkTask(idTask);
+  });
+}
+
+// fonction pour voir si une tâche est checkée
+async function checkTask(idTask) {
+  await fetch(`todolist.php?checked=${idTask}`).then((resp) => {
+    return resp.text();
   });
 }
 
 let delBtns = document.querySelectorAll(".del"); // tous les boutons de suppression
-let tasksLists = document.querySelector("#lists"); // élément HTML pour toutes les tâches
+// let tasksLists = document.querySelector("#lists"); // élément HTML pour toutes les tâches
 
 // boucle à travers tous les boutons de suppression
 for (const btn of delBtns) {
@@ -55,11 +62,12 @@ for (const btn of delBtns) {
     // événement d'écoute du clic sur le bouton de suppression
     e.preventDefault(); // empêche le bouton d'effectuer son action par défaut
     let idTask = e.target.id; // récupère l'identifiant de la tâche à supprimer
-    console.log(idTask);
     deleteTask(idTask); // appelle la fonction pour supprimer la tâche
+    // doneTasks.remove(box.parentNode); // supprimer la tâche de 'élément HTML "toDoTasks"
+    // toDoTasks.remove(box.parentNode); // supprimer la tâche de 'élément HTML "toDoTasks"
     setTimeout(function () {
       window.location.href = "todolist.php";
-    }, 1500);
+    }, 1000);
   });
 }
 
