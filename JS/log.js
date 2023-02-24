@@ -53,12 +53,12 @@ connect.addEventListener("click", async (event) => {
       connexion.innerHTML = content;
       connexion.style.color = "#639fab";
       cError.textContent = "";
-          if (content == "Connexion réussie") {
-            // redirection
-            setTimeout(function () {
-            window.location.href = "todolist.php";
-            }, 2000);
-        }
+      if (content === "Connexion réussie") {
+        // redirection
+        setTimeout(function () {
+          window.location.href = "todolist.php";
+        }, 2000);
+      }
     });
 });
 

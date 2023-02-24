@@ -42,9 +42,11 @@ h3 {
   padding-bottom: 20px;
 }
 
-#toDolist li {
+#toDolist li,
+#doneList li {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   padding: 2px;
   width: 100%;
 }
@@ -152,6 +154,18 @@ button:active {
   transform: scale(0.95);
 }
 
+.del {
+  background-color: #f6f5f7;
+  padding: 4px 6px;
+  margin-top: 10px;
+  margin-left: 40px;
+}
+
+.del a {
+  color: #00203f;
+  margin-left: 2px;
+}
+
 h1 {
   margin: 0;
   font-size: 24px;
@@ -181,6 +195,9 @@ h1 {
 #DoneContainer {
   width: 50%;
   height: 100%;
+  /* display: flex;
+  justify-content: center;
+  flex-direction: column; */
 }
 
 a {

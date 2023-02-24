@@ -165,7 +165,7 @@ class User_pdo
             foreach ($ligne as $value) {
                 $i++;
                 // $result = ucfirst($displayTask[$i][4]) . " " . '(ajout le ' . $displayTask[$i][0] . ')<br>';
-                $result = ucfirst($displayTask[$i][4]) . '<br> (ajout le : ' . $displayTask[$i][0] . ' & fait le : ' . $displayTask[$i][1] . ')<br>';
+                $result = ucfirst($displayTask[$i][4]) . '<br> (crée le : ' . $displayTask[$i][0] . '<br> & modifiée le : ' . $displayTask[$i][1] . ')<br>';
                 $id = $displayTask[$i][2];
                 echo '<li id="' . $id . '" >
                         <input type="checkbox" class="box" id="box" name="box" value="todo">' . $result . ' 
